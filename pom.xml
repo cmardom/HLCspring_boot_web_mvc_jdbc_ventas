@@ -33,6 +33,12 @@
 			(spring_boot_web_mvc_jdbc_ventas) tiene que añadir expresamente esta dependencia
 			devtools marcada como optional a true-->
 		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
