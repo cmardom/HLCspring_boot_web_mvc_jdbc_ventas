@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.iesvdm</groupId>
-	<artifactId>HLCspring_boot_web_mvc_jdbc_ventas</artifactId>
+	<artifactId>spring_boot_web_mvc_jdbc_ventas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HLCspring_boot_web_mvc_jdbc_ventas</name>
+	<name>spring_boot_web_mvc_jdbc_ventas</name>
 	<description>Proyecto Ventas</description>
 	<properties>
 		<!-- mínima versión de java con spring boot 3 -->
@@ -33,12 +33,6 @@
 			(spring_boot_web_mvc_jdbc_ventas) tiene que añadir expresamente esta dependencia
 			devtools marcada como optional a true-->
 		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.6.0</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,10 +49,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-			<!-- dependencia para utilizar acceso a base de datos
+			<!-- dependencia para utilizar acceso a base de datos 
 			con estilo de sql directo sobre jdbc (JdbcTemplate) -->
-			<!-- Excluimos el Connection Pool de jdbc de tomcat,
-			para usar el Hikari Connection Pool más veloz
+			<!-- Excluimos el Connection Pool de jdbc de tomcat, 
+			para usar el Hikari Connection Pool más veloz 
 			https://github.com/brettwooldridge/HikariCP-->
 			<exclusions>
 				<exclusion>
@@ -67,7 +61,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- añadimos el connection pool Hikari compatible con java11+,
+		<!-- añadimos el connection pool Hikari compatible con java11+, 
 			automáticamente spring boot lo cogerá en vez
 			del connection pool de tomcat que hemos excluido -->
 		<dependency>
@@ -84,6 +78,15 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
+
+		</dependency>
+
+
+
 		<!-- añadimos lombok para mayor simplificación del código -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -99,43 +102,20 @@
 	</dependencies>
 
 	<build>
-		<finalName>spring_boot_web_mvc_jdbc_ventas</finalName>
 		<plugins>
-
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<source>17</source>
-					<target>17</target>
-					<annotationProcessorPaths>
-						<path>
+					<!-- incluir cuando tarea mvn build:
+				<excludeDevtools>true</excludeDevtools> -->
+					<excludes>
+						<!-- se excluye la dependencia de lombok de la tarea mvn build-->
+						<exclude>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.30</version>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>org.iesvdm.SpringBootWebMvcJdbcVentasApplication</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.3.0</version>
-				<configuration>
-					<propertiesEncoding>ISO-8859-1</propertiesEncoding>
+						</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
